@@ -45,16 +45,6 @@ export const countries = [
             value: "in"
       },
       {
-            key: 10,
-            text: "Ireland",
-            value: "ir"
-      },
-      {
-            key: 11,
-            text: "Israel",
-            value: "is"
-      },
-      {
             key: 12,
             text: "Italy",
             value: "it"
@@ -88,11 +78,6 @@ export const countries = [
             key: 18,
             text: "South Africa",
             value: "za"
-      },
-      {
-            key: 19,
-            text: "Spain",
-            value: "es"
       },
       {
             key: 20,

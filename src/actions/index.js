@@ -46,3 +46,10 @@ export function changeCategory(categoryName) {
         categoryName
     }
 }
+
+export function changePage(activePage) {
+    return {
+        type: 'PAGE_CHANGED',
+        activePage
+    }
+}

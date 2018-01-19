@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, Image, Container } from 'semantic-ui-react';
+import  image  from './news-icon.png';
 
 class News extends Component {
 
@@ -19,7 +20,7 @@ class News extends Component {
 						<Card.Group>
 			        {data.articles.map((elem,index)=> (
 				        	<Card href={elem.url} key={index} color="red" centered raised>
-				        		<Image src={elem.urlToImage} />
+				        		<Image bordered src={elem.urlToImage!=null?elem.urlToImage:image} />
 				        		<Card.Content>
 				        			<Card.Header>{elem.title}</Card.Header>
 				        			<Card.Meta textAlign="right">{elem.author}</Card.Meta>
