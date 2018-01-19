@@ -5,8 +5,10 @@ import { Image, Container, Dropdown, Menu, Pagination } from 'semantic-ui-react'
 import { countries } from './constants/countryList';
 import { categories } from './constants/categories';
 import  image  from './components/news-icon.png';
+import errImg from './nonews.png';
 import { URL, KEY, PAGE_SIZE } from './constants/constants';
 import { itemsFetchData, changeCountry, changeCategory, changePage } from './actions';
+import  Footer  from './components/Footer';
 import News from './components/News';
 import './App.css';
 
@@ -30,39 +32,51 @@ class App extends Component {
 
 
   render() {
-    return (
-    <div style={{backgroundImage:'url("https://pooreboysingray.files.wordpress.com/2014/11/mobile-tribune-18640001.jpg")',backgroundSize:'auto',flex:'1'}}>
-      <Menu fluid stackable inverted>
-        <Container>
-          <Menu.Item as='a' header>
-            <Image
-              src={image}
-              size="mini"
-              style={{ marginRight: '1em' }}
-            />
-            Headlines Today
-          </Menu.Item>
-          <Dropdown openOnFocus inline item placeholder='Category' options={ categories } onChange = {(ev, {value} ) => this.props.changeCategory(value) } />
-          <Dropdown openOnFocus inline item placeholder='Country' value={this.props.country} options={ countries } onChange = {(ev, {value} ) => this.props.changeCountry(value) } />
-        </Container>
-      </Menu>
-      <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-        <Pagination
-          value={this.props.activePage}
-          ellipsisItem={null}
-          inverted
-          totalPages={this.props.totalPages?Math.ceil(this.props.totalPages/PAGE_SIZE):3}
-          defaultActivePage={1}
-          onPageChange={(ev, { activePage }) => this.props.changePage(activePage) } />
-      </div>
-      <News />
-    </div>  
-    );
+    if(this.props.status!=="error") {
+      return (
+      <div style={{backgroundImage:'url("https://pooreboysingray.files.wordpress.com/2014/11/mobile-tribune-18640001.jpg")',flex:'1'}}>
+        <Menu fluid stackable inverted>
+          <Container>
+            <Menu.Item as='a' header>
+              <Image
+                src={image}
+                size="mini"
+                style={{ marginRight: '1em' }}
+              />
+              Headlines Today
+            </Menu.Item>
+            <Dropdown openOnFocus inline item placeholder='Category' options={ categories } onChange = {(ev, {value} ) => this.props.changeCategory(value) } />
+            <Dropdown openOnFocus inline item placeholder='Country' value={this.props.country} options={ countries } onChange = {(ev, {value} ) => this.props.changeCountry(value) } />
+          </Container>
+        </Menu>
+        <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+          <Pagination
+            value={this.props.activePage}
+            ellipsisItem={null}
+            inverted
+            totalPages={this.props.totalPages?Math.ceil(this.props.totalPages/PAGE_SIZE):3}
+            defaultActivePage={1}
+            onPageChange={(ev, { activePage }) => this.props.changePage(activePage) } />
+        </div>
+        <News />
+        <Footer />
+      </div>  
+      );
+    }
+    else {
+      return (
+        <div style={{marginTop:'10px',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+         <Image src={errImg} size="big" centered />
+         <h1 style={{textAlign:'center'}}>404!!<br/>Some error has occured as the page cannot be found!! </h1>
+        </div>
+      )
+    }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
+    status: state.status,
     totalPages: state.data.totalResults,
     country: state.country,
     category: state.category,

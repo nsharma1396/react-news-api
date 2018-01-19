@@ -39,7 +39,7 @@ class News extends Component {
 			)
 		}
 		else
-			return <h1>dasd</h1>;
+			return <h1></h1>;
 	}
 
 }
