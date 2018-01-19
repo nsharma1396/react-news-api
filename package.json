@@ -2,7 +2,7 @@
   "name": "dictionary",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://nsharma1396.github.io/panorama",
+  "homepage": "https://nsharma1396.github.io/react-news-api",
   "devDependencies": {
     "gh-pages": "^1.1.0",
     "react-scripts": "1.0.13"
