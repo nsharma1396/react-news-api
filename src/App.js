@@ -64,11 +64,10 @@ class App extends Component {
         <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
           <Pagination
             style={{visibility:this.props.status==="loading"?'hidden':'visible'}}
-            value={this.props.activePage}
+            activePage={this.props.activePage}
             ellipsisItem={null}
             inverted
-            totalPages={this.props.totalPages?Math.ceil(this.props.totalPages/PAGE_SIZE):3}
-            defaultActivePage={1}
+            totalPages={this.props.totalResults?Math.ceil(this.props.totalResults/PAGE_SIZE):3}
             onPageChange={(ev, { activePage }) => this.props.changePage(activePage) } />
         </div>
         <News />
@@ -93,7 +92,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     status: state.status,
-    totalPages: state.data.totalResults,
+    totalResults: state.data.totalResults,
     country: state.country,
     category: state.category,
     activePage: state.activePage

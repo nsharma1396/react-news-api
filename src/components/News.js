@@ -24,7 +24,11 @@ class News extends Component {
 						<Card.Group>
 			        {data.articles.map((elem,index)=> (
 				        	<Card href={elem.url} key={index} color="red" centered raised>
-				        		<Image bordered src={elem.urlToImage!=null?elem.urlToImage:image} />
+				        		<Image
+				        		bordered
+				        		src={
+				        			elem.urlToImage&&elem.urlToImage.substr(0,4)==="http"?elem.urlToImage:image
+				        		}/>
 				        		<Card.Content>
 				        			<Card.Header>{elem.title}</Card.Header>
 				        			<Card.Meta textAlign="right">{elem.author}</Card.Meta>
@@ -41,12 +45,10 @@ class News extends Component {
 		      </Container>
 	        <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
 	          <Pagination
-	            style={{visibility:this.props.status==="loading"?'hidden':'visible'}}
-	            value={this.props.activePage}
 	            ellipsisItem={null}
 	            inverted
 	            totalPages={data.totalResults?Math.ceil(data.totalResults/PAGE_SIZE):3}
-	            defaultActivePage={1}
+	            activePage={this.props.activePage}
 	            onPageChange={(ev, { activePage }) => this.props.changePage(activePage) } />
 	        </div>
 	        <br/>		      
@@ -62,6 +64,7 @@ class News extends Component {
 
 const mapStateToProps = (state) => {
   return {
+  	activePage: state.activePage,
   	data : state.data,
   	status : state.status,
   };
