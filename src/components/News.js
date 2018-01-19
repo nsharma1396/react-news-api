@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, Image, Container, Dimmer, Loader } from 'semantic-ui-react';
+import { Card, Image, Container, Dimmer, Loader, Pagination } from 'semantic-ui-react';
 import  image  from './news-icon.png';
 import  Footer  from './Footer';
+import { PAGE_SIZE } from '../constants/constants';
+import { changePage } from '../actions';
 
 
 class News extends Component {
@@ -37,6 +39,17 @@ class News extends Component {
 			        ))}
 		        </Card.Group>
 		      </Container>
+	        <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+	          <Pagination
+	            style={{visibility:this.props.status==="loading"?'hidden':'visible'}}
+	            value={this.props.activePage}
+	            ellipsisItem={null}
+	            inverted
+	            totalPages={this.props.totalPages?Math.ceil(this.props.totalPages/PAGE_SIZE):3}
+	            defaultActivePage={1}
+	            onPageChange={(ev, { activePage }) => this.props.changePage(activePage) } />
+	        </div>
+	        <br/>		      
 	        <Footer />
 		    </div>
 			)
@@ -56,6 +69,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    changePage: (activePage) => dispatch(changePage(activePage)),
   };
 };
 
