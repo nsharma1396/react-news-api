@@ -2,6 +2,7 @@ import { LOADING, SUCCESS, ERROR, COUNTRY_CHANGED, CATEGORY_CHANGED, PAGE_CHANGE
 
 const init = {
 	data: [],
+	statusCode:'200',
 	status: 'initial',
 	country: 'in',
 	category: '',
@@ -15,7 +16,7 @@ export default (state = init, action) => {
 		case SUCCESS:
 			return {...state,status:"success", data: action.items}
 		case ERROR :
-			return {...state,status:"error"}
+			return {...state,status:"error", statusCode: action.statusCode}
 		case COUNTRY_CHANGED :
 			return {...state,country:action.countryName}
 		case CATEGORY_CHANGED :

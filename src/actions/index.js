@@ -1,6 +1,7 @@
-function itemsHasErrored() {
+function itemsHasErrored(status) {
     return {
         type: 'ERROR',
+        statusCode:status
     };
 }
 
@@ -27,8 +28,7 @@ export function itemsFetchData(url) {
             .then((response) => response.json())
             .then((items) => {
                 dispatch(itemsFetchDataSuccess(items))})
-            .catch((e) => {
-                console.log(e)
+            .catch(() => {
                 dispatch(itemsHasErrored())});
             };
 }

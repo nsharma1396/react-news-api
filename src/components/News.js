@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, Image, Container } from 'semantic-ui-react';
+import { Card, Image, Container, Dimmer, Loader } from 'semantic-ui-react';
 import  image  from './news-icon.png';
+import  Footer  from './Footer';
+
 
 class News extends Component {
 
@@ -9,11 +11,11 @@ class News extends Component {
 		const { data,status } = this.props;
 		if(status==="loading")
 			return (
-				<h1 style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-					LOADING...
-				</h1>	
+					<Dimmer active>
+						<Loader />
+					</Dimmer>	
 		)
-		else if(status==="success") {
+		else if(status==="success"){
 			return (
 			  <div>
 					<Container style={{padding:'20px'}}>
@@ -35,11 +37,12 @@ class News extends Component {
 			        ))}
 		        </Card.Group>
 		      </Container>
+	        <Footer />
 		    </div>
 			)
 		}
 		else
-			return <h1></h1>;
+			return null;
 	}
 
 }
