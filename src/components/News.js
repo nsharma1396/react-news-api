@@ -45,7 +45,7 @@ class News extends Component {
 	            value={this.props.activePage}
 	            ellipsisItem={null}
 	            inverted
-	            totalPages={this.props.totalPages?Math.ceil(this.props.totalPages/PAGE_SIZE):3}
+	            totalPages={data.totalResults?Math.ceil(data.totalResults/PAGE_SIZE):3}
 	            defaultActivePage={1}
 	            onPageChange={(ev, { activePage }) => this.props.changePage(activePage) } />
 	        </div>
